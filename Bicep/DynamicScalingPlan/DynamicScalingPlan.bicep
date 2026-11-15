@@ -32,10 +32,7 @@ param exclusionTag string = ''
 @description('The tags to be assigned to the Scaling plan.')
 param tags object = {}
 
-@description('The AVD api version.')
-param apiVersion string = '2024-04-03'
-
-resource scalingPlan 'Microsoft.DesktopVirtualization/scalingplans@[parameters(\'apiVersion\')]' = {
+resource scalingPlan 'Microsoft.DesktopVirtualization/scalingplans@2024-04-03' = {
   name: scalingPlanName
   location: location
   tags: tags
@@ -50,7 +47,7 @@ resource scalingPlan 'Microsoft.DesktopVirtualization/scalingplans@[parameters(\
   }
 }
 
-resource scalingPlanName_schedules_name 'Microsoft.DesktopVirtualization/scalingPlans/pooledSchedules@[parameters(\'apiVersion\')]' = [
+resource scalingPlanName_schedules_name 'Microsoft.DesktopVirtualization/scalingPlans/pooledSchedules@2024-04-03' = [
   for item in schedules: if ((hostPoolType == 'Pooled') && systemData.personalScalingPlanFeature) {
     name: '${scalingPlanName}/${item.name}'
     properties: item
@@ -60,7 +57,7 @@ resource scalingPlanName_schedules_name 'Microsoft.DesktopVirtualization/scaling
   }
 ]
 
-resource Microsoft_DesktopVirtualization_scalingPlans_personalSchedules_scalingPlanName_schedules_name 'Microsoft.DesktopVirtualization/scalingPlans/personalSchedules@[parameters(\'apiVersion\')]' = [
+resource Microsoft_DesktopVirtualization_scalingPlans_personalSchedules_scalingPlanName_schedules_name 'Microsoft.DesktopVirtualization/scalingPlans/personalSchedules@2024-04-03' = [
   for item in schedules: if ((hostPoolType == 'Personal') && systemData.personalScalingPlanFeature) {
     name: '${scalingPlanName}/${item.name}'
     properties: item
