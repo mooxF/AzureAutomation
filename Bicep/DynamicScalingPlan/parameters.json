@@ -1,0 +1,82 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "scalingPlanName": {
+            "value": "scaling-plan-name"
+        },
+        "timezone": {
+            "value": "GMT Standard Time"
+        },
+        "friendlyName": {
+            "value": "scaling-plan-friendly-name"
+        },
+        "hostpoolType": {
+            "value": "Pooled"
+        },
+        "schedules": {
+            "value": [
+                {
+                    "name": "weekdays_schedule",
+                    "daysOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday"
+                    ],
+                    "scalingMethod": "CreateDeletePowerManage",
+                    "rampUpStartTime": {
+                        "hour": 8,
+                        "minute": 0
+                    },
+                    "rampUpLoadBalancingAlgorithm": "BreadthFirst",
+                    "rampUpMinimumHostsPct": 100,
+                    "rampUpCapacityThresholdPct": 60,
+                    "peakStartTime": {
+                        "hour": 9,
+                        "minute": 0
+                    },
+                    "peakLoadBalancingAlgorithm": "BreadthFirst",
+                    "rampDownStartTime": {
+                        "hour": 18,
+                        "minute": 0
+                    },
+                    "rampDownLoadBalancingAlgorithm": "DepthFirst",
+                    "rampDownMinimumHostsPct": 100,
+                    "rampDownCapacityThresholdPct": 90,
+                    "rampDownWaitTimeMinutes": 30,
+                    "rampDownStopHostsWhen": "ZeroActiveSessions",
+                    "rampDownNotificationMessage": "You will be logged off in 30 min. Make sure to save your work.",
+                    "offPeakStartTime": {
+                        "hour": 22,
+                        "minute": 0
+                    },
+                    "offPeakLoadBalancingAlgorithm": "DepthFirst",
+                    "rampDownForceLogoffUsers": false,
+                    "generalActiveMinimumHostsPct": 100,
+                    "generalMaximumHostPoolSize": 10,
+                    "generalMinimumHostPoolSize": 5,
+                    "createDelete": {
+                        "rampUpMaximumHostPoolSize": 10,
+                        "rampUpMinimumHostPoolSize": 5,
+                        "rampDownMaximumHostPoolSize": 10,
+                        "rampDownMinimumHostPoolSize": 5
+                    }
+                }
+            ]
+        },
+        "location": {
+            "value": "uksouth"
+        },
+        "tags": {
+            "value": {}
+        },
+        "exclusionTag": {
+            "value": "No_Scale"
+        },
+        "apiVersion": {
+            "value": "2024-11-01-preview"
+        }
+    }
+}
