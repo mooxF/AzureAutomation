@@ -32,7 +32,7 @@ param exclusionTag string = ''
 @description('The tags to be assigned to the Scaling plan.')
 param tags object = {}
 
-resource scalingPlan 'Microsoft.DesktopVirtualization/scalingplans@2024-04-03' = {
+resource scalingPlan 'Microsoft.DesktopVirtualization/scalingplans@2026-04-01-preview' = {
   name: scalingPlanName
   location: location
   tags: tags
