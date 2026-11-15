@@ -42,27 +42,8 @@ resource scalingPlan 'Microsoft.DesktopVirtualization/scalingplans@2024-04-03' =
     hostPoolType: hostPoolType
     timeZone: timeZone
     exclusionTag: exclusionTag
-    schedules: ((!systemData.personalScalingPlanFeature) ? schedules : null)
+    schedules: schedules
     hostPoolReferences: hostpoolReferences
   }
 }
 
-resource scalingPlanName_schedules_name 'Microsoft.DesktopVirtualization/scalingPlans/pooledSchedules@2024-04-03' = [
-  for item in schedules: if ((hostPoolType == 'Pooled') && systemData.personalScalingPlanFeature) {
-    name: '${scalingPlanName}/${item.name}'
-    properties: item
-    dependsOn: [
-      scalingPlan
-    ]
-  }
-]
-
-resource Microsoft_DesktopVirtualization_scalingPlans_personalSchedules_scalingPlanName_schedules_name 'Microsoft.DesktopVirtualization/scalingPlans/personalSchedules@2024-04-03' = [
-  for item in schedules: if ((hostPoolType == 'Personal') && systemData.personalScalingPlanFeature) {
-    name: '${scalingPlanName}/${item.name}'
-    properties: item
-    dependsOn: [
-      scalingPlan
-    ]
-  }
-]
