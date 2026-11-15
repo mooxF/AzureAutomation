@@ -35,9 +35,6 @@ param tags object = {}
 @description('The AVD api version.')
 param apiVersion string = '2024-04-03'
 
-@description('System data is used for internal purposes, such as support preview features.')
-param systemData object = {}
-
 resource scalingPlan 'Microsoft.DesktopVirtualization/scalingplans@[parameters(\'apiVersion\')]' = {
   name: scalingPlanName
   location: location
