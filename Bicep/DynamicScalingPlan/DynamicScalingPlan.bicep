@@ -47,3 +47,15 @@ resource scalingPlan 'Microsoft.DesktopVirtualization/scalingplans@2026-04-01-pr
   }
 }
 
+// ------------------------------------------------------------
+// Outputs
+
+output scalingPlanName string = scalingPlan.name
+output scalingPlanId string = scalingPlan.id
+output scalingPlanLocation string = scalingPlan.location
+output scalingPlanResourceGroup string = resourceGroup().name
+
+output scalingPlanHostPoolType string = scalingPlan.properties.hostPoolType
+output scalingPlanTimeZone string = scalingPlan.properties.timeZone
+output scalingPlanSchedules array = scalingPlan.properties.schedules
+output scalingPlanHostPoolReferences array = scalingPlan.properties.hostPoolReferences
